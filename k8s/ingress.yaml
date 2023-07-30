@@ -1,0 +1,54 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+#    nginx.ingress.kubernetes.io/rewrite-target: /health/
+    nginx.ingress.kubernetes.io/configuration-snippet: |-
+      rewrite ^/otusapp/.+/+ /health/ last;
+  
+    
+    
+    
+  name: healthchecker-ingress
+  namespace: hw6
+  labels:
+    name: healthchecker
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: arch.homework
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/crash/"
+        backend:
+          service:
+            name: healthchecker-service
+            port:
+              number: 80      
+#      - path: /otusapp/.+/+
+#        pathType: Prefix
+#        backend:
+#          service:
+#            name: healthchecker-service
+#            port: 
+#              number: 80
+      - pathType: Prefix
+        path: "/health"
+        backend:
+          service:
+            name: healthchecker-service
+            port:
+              number: 80
+      - pathType: Prefix
+        path: "/health/"
+        backend:
+          service:
+            name: healthchecker-service
+            port:
+              number: 80
+
+
+
+

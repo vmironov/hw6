@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: healthchecker-service
+  namespace: hw6
+spec:
+  selector:
+    app: healthchecker-app
+  ports:
+  - port: 80
+    targetPort: 8000
+

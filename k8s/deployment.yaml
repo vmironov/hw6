@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: healthchecker-deployment
+  namespace: hw6
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: healthchecker-app
+  template:
+    metadata:
+      labels:
+        app: healthchecker-app
+    spec:
+      containers:
+      - name: my-healthchecker-image
+        image: viacheslavmironov/myotushomework:v3
+        resources:
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+        ports:
+        - containerPort: 8000
+        livenessProbe:
+            initialDelaySeconds: 1
+            periodSeconds: 2
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 1
+            httpGet:
+              scheme: HTTP
+              path: /health/
+              httpHeaders:
+                - name: Host
+                  value: arch.homework
+              port: 8000
+
+
