@@ -1,6 +1,7 @@
-# Homework #6
-1. K8s yaml files
-  Run: kubectl apply -f ./k8s/
+# Домашнаяя работа для занятия #6
 
-3. Postman collection
-  Run: newman run HW6.postman_collection.json --verbose
+- **K8s yaml files** - содержат deployment, liveness-пробу, service, ingress
+  > Note: Команда запуска: kubectl apply -f ./k8s/
+
+- **Postman collection**
+  > Note: Команда запуска: newman run HW6.postman_collection.json --verbose
